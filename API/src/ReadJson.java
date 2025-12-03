@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,11 +41,11 @@ public class ReadJson {
     }
 
     public  void pull() throws ParseException {
-        String output = "abc";f
+        String output = "abc";
         String totlaJson="";
         try {
 
-            URL url = new URL("https://swapi.dev/api/people/4/");
+            URL url = new URL("https://pokeapi.co/api/v2/pokemon/ditto");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
@@ -64,7 +65,7 @@ public class ReadJson {
 
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
-                System.out.println(output);
+                //System.out.println(output);
                 totlaJson+=output;
             }
 
@@ -80,23 +81,31 @@ public class ReadJson {
         JSONParser parser = new JSONParser();
         //System.out.println(str);
         org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) parser.parse(totlaJson);
-        System.out.println(jsonObject);
+        //System.out.println(jsonObject);
 
         try {
 
             String name = (String)jsonObject.get("name");
+            String pleasework = "";
 
-            org.json.simple.JSONArray msg = (org.json.simple.JSONArray) jsonObject.get("films");
-            int n =   msg.size(); //(msg).length();
-            for (int i = 0; i < n; ++i) {
-                String test =(String) msg.get(i);
-                System.out.println(test);
+            org.json.simple.JSONArray abilities = (org.json.simple.JSONArray) jsonObject.get("abilities");
+            //org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("starships");
+            //int n = msg.size(); //(msg).length();
+            int n2 = abilities.size();
+//            for (int i = 0; i < n; ++i) {
+//                String test =(String) msg.get(i);
+//                System.out.println(test);
+//                // System.out.println(person.getInt("key"));
+//            }
+            for (int i = 0; i < n2; i++) {
+                System.out.println(abilities.get(i));
+
+                //System.out.println();
                 // System.out.println(person.getInt("key"));
             }
-            String height= (String)jsonObject.get("height");
-            String hair_color = (String)jsonObject.get("hair_color");
-            System.out.println(name);
-            System.out.println(hair_color);
+            //System.out.println(name);
+            //System.out.println(hair_color);
+            //System.out.println(starship);
         }
 
         catch (Exception e) {
