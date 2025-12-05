@@ -98,10 +98,13 @@ public class ReadJson {
 //                // System.out.println(person.getInt("key"));
 //            }
             for (int i = 0; i < n2; i++) {
-                System.out.println(abilities.get(i));
+                org.json.simple.JSONObject abilityContainer = (org.json.simple.JSONObject) abilities.get(i);
+                //only find ability
+                org.json.simple.JSONObject abilityDetails = (org.json.simple.JSONObject) abilityContainer.get("ability");
 
-                //System.out.println();
-                // System.out.println(person.getInt("key"));
+                // 4. Get the name from the ability object in teh array
+                String abilityName = (String) abilityDetails.get("name");
+                System.out.println("ability " + (i+1) + ": " + abilityName);
             }
             //System.out.println(name);
             //System.out.println(hair_color);
